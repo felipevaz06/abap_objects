@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition - Expondo Serviço de Estoque'
+define service ZC_PRODUCT_FVF {
+  expose ZC_PRODUCT_FVF;
+  expose ZC_MOVMENT_FVF;
+}

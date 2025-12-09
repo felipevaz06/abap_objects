@@ -1,0 +1,23 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_PRODUCT_FVF alias ProductProj
+use etag
+{
+  use create;
+  use update;
+  use delete;
+  use action add_product;
+
+
+  use association _MOVMENTS { create; }
+
+}
+define behavior for ZC_MOVMENT_FVF alias MovmentProj
+use etag
+{
+  use update;
+  use delete;	
+  //use action add_product;
+  use association _PRODUCT {  }
+}

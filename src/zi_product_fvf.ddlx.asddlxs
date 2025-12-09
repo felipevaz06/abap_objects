@@ -1,0 +1,61 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Produtos', typeNamePlural: 'Produtos', title: { type: #STANDARD, value: 'ProductId' } } }
+
+annotate entity ZC_PRODUCT_FVF with
+{
+
+  @UI.facet: [{ id: 'Produtos',
+              label: 'Produtos',
+              purpose: #STANDARD,
+              type: #IDENTIFICATION_REFERENCE,
+              position: 10 }
+              ,
+              { id:  'Movimentacao',
+              label: 'Movimentação',
+              purpose: #STANDARD,
+              type: #LINEITEM_REFERENCE,
+              position: 20,
+              targetElement: '_MOVMENTS'
+               }
+                ]
+
+
+  @UI: {
+      lineItem: [{ position: 10, importance: #HIGH }]
+      ,
+      identification: [{ position: 10, label: 'ID Produto' } ,{ type: #FOR_ACTION, dataAction: 'add_product', label: 'Adicionar Produtos' } ],
+      selectionField: [{ position: 10 }]
+  }
+
+  ProductId;
+  @UI: {
+        lineItem: [{ position: 20, importance: #HIGH }]
+        ,
+        identification: [{ position: 20, label: 'Nome Produto' }],
+        selectionField: [{ position: 20 }]
+    }
+  ProductName;
+  @UI: {
+       lineItem: [{ position: 30, importance: #HIGH }]
+       ,
+       identification: [{ position: 30, label: 'Categoria' }],
+       selectionField: [{ position: 30 }]
+   }
+  Category;
+  @UI: {
+        lineItem: [{ position: 40, importance: #HIGH }]
+        ,
+        identification: [{ position: 40, label: 'Preço' }]
+    }
+  Price;
+  @UI.hidden: true
+  created_by;
+  @UI.hidden: true
+  created_at;
+  @UI.hidden: true
+  last_changed_by;
+  @UI.hidden: true
+  last_changed_at;
+
+}

@@ -1,0 +1,69 @@
+managed implementation in class zbp_i_product_fvf unique;
+strict ( 2 );
+
+define behavior for ZI_PRODUCT_FVF alias Product
+persistent table ztproduct_fvf
+lock master
+authorization master ( global )
+etag master last_changed_at
+{
+
+
+
+  create;
+  update;
+  delete;
+
+  field ( readonly )
+  created_by,
+  created_at,
+  last_changed_by,
+  last_changed_at;
+
+  factory action add_product parameter za_quantity_fvf  [1] ;
+   side effects { action add_product affects $self; }
+
+  field (  readonly: update ) ProductId;
+   mapping for ztproduct_fvf corresponding
+    {
+      ProductId       = product_id;
+      ProductName     = product_name;
+      Category        = category;
+      Price           = Price;
+      CurrencyCode    = currency_code;
+      created_by      = created_by;
+      created_at      = created_at;
+      last_changed_by = last_changed_by;
+      last_changed_at = last_changed_at;
+    }
+
+
+  association _MOVMENTS { create; }
+
+
+}
+
+define behavior for ZI_MOVMENT_FVF alias Movment
+persistent table ztmovment_fvf
+lock dependent by _PRODUCT
+authorization dependent by _PRODUCT
+etag master LastChangedAt
+{
+  update;
+  delete;
+  field ( readonly )ProductId;
+
+  field ( readonly: update )MovmentId;
+
+// action ( features : instance ) add_product parameter za_quantity_fvf result [1] $self;
+  mapping for ztmovment_fvf corresponding
+    {
+      MovmentId     = movment_id;
+      ProductId     = product_id;
+      MovmentType   = movment_type;
+      Quantity      = quantity;
+      MovmentDate   = movment_date;
+      LastChangedAt = last_changed_at;
+    }
+  association _PRODUCT { }
+}

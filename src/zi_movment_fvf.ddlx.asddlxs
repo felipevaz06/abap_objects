@@ -1,0 +1,31 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Movimentação', typeNamePlural: 'Movimentações', title: { type: #STANDARD, value: 'MovmentId' } } }
+
+annotate entity ZC_MOVMENT_FVF with
+{
+@UI.facet: [
+              { id:  'Movimentacao',
+              label: 'Movimentação',
+              purpose: #STANDARD,
+              type: #IDENTIFICATION_REFERENCE,
+              position: 20
+               }
+                ]
+  @UI: { lineItem: [ { position: 10 } ], identification: [ { position: 10 } ],  selectionField: [{ position: 10 }] }
+  MovmentId;
+  @UI: { lineItem:       [ { position: 20, importance: #HIGH } ],
+              identification: [ { position: 20 } ] }
+  ProductId;
+  @UI: { lineItem:       [ { position: 30, importance: #HIGH } ],
+              identification: [ { position: 30 } ] }
+  MovmentType;
+  @UI: { lineItem:       [ { position: 40, importance: #HIGH } ],
+              identification: [ { position: 40 } ] }
+  Quantity;
+  @UI: { lineItem:       [ { position: 50, importance: #HIGH }   ],
+              identification: [ { position: 50 } ] }
+  MovmentDate;
+
+
+}
